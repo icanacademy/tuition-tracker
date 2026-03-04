@@ -1,0 +1,1149 @@
+/* ==================== CSS VARIABLES ==================== */
+:root {
+  --primary: #0D9488;
+  --primary-hover: #0F766E;
+  --primary-light: #CCFBF1;
+  --primary-bg: #F0FDFA;
+  --accent: #14B8A6;
+
+  --success: #10B981;
+  --success-light: #D1FAE5;
+  --warning: #F59E0B;
+  --warning-light: #FEF3C7;
+  --danger: #EF4444;
+  --danger-light: #FEE2E2;
+
+  --text: #1E293B;
+  --text-secondary: #64748B;
+  --text-light: #94A3B8;
+  --bg: #F8FAFC;
+  --white: #FFFFFF;
+  --border: #E2E8F0;
+  --border-light: #F1F5F9;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+  --radius: 8px;
+  --radius-lg: 12px;
+}
+
+/* ==================== RESET & BASE ==================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* ==================== HEADER ==================== */
+.header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+  color: white;
+  padding: 16px 24px;
+  box-shadow: var(--shadow-md);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo {
+  height: 40px;
+  border-radius: 6px;
+}
+
+.header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.header-subtitle {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.header-date {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  background: rgba(255,255,255,0.15);
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+/* ==================== TABS ==================== */
+.tabs {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 4px;
+  padding: 12px 24px 0;
+  position: relative;
+  border-bottom: 2px solid var(--border);
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover { color: var(--primary); }
+
+.tab-btn.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  font-weight: 600;
+}
+
+.tab-indicator { display: none; }
+
+/* ==================== TAB CONTENT ==================== */
+.tab-content {
+  display: none;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  animation: fadeIn 0.2s ease;
+}
+
+.tab-content.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== SUMMARY CARDS ==================== */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--primary);
+}
+
+.summary-card.card-warning { border-left-color: var(--warning); }
+.summary-card.card-danger { border-left-color: var(--danger); }
+.summary-card.card-success { border-left-color: var(--success); }
+
+.summary-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.summary-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ==================== SECTIONS ==================== */
+.section {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.section-header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* ==================== FILTER BAR ==================== */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-select {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  color: var(--text);
+  background: var(--white);
+  cursor: pointer;
+}
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+.btn-primary:hover { background: var(--primary-hover); }
+
+.btn-secondary {
+  background: var(--border-light);
+  color: var(--text);
+}
+.btn-secondary:hover { background: var(--border); }
+
+.btn-success {
+  background: var(--success);
+  color: white;
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: white;
+}
+
+.btn-icon {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.btn-icon:hover { background: var(--border-light); }
+
+.btn-sm {
+  padding: 4px 12px;
+  font-size: 0.8rem;
+}
+
+/* ==================== STUDENT BILLING LIST ==================== */
+.student-billing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.student-billing-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto auto;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  transition: background 0.15s;
+}
+.student-billing-row:hover { background: var(--primary-light); }
+
+.student-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.student-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.student-meta {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.type-badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.type-local {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.type-camper {
+  background: var(--warning-light);
+  color: #B45309;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-paid {
+  background: var(--success-light);
+  color: #065F46;
+}
+
+.status-unpaid {
+  background: var(--danger-light);
+  color: #991B1B;
+}
+
+.status-no-period {
+  background: var(--border-light);
+  color: var(--text-secondary);
+}
+
+.status-with-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.paid-date-label {
+  font-size: 0.7rem;
+  color: #065F46;
+  white-space: nowrap;
+}
+
+/* ==================== CALENDAR ==================== */
+.calendar-controls {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.calendar-student-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calendar-student-select label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.calendar-student-select select {
+  min-width: 220px;
+}
+
+.schedule-display {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: var(--primary-light);
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+.calendar-container {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.calendar-month-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  min-width: 180px;
+  text-align: center;
+}
+
+.calendar-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.legend-dot.present { background: var(--success); }
+.legend-dot.late { background: var(--warning); }
+.legend-dot.absent { background: var(--danger); }
+
+.legend-bar {
+  width: 24px;
+  height: 6px;
+  border-radius: 3px;
+}
+
+.legend-bar.paid { background: var(--success); }
+.legend-bar.unpaid { background: var(--danger); }
+
+/* Calendar Grid */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.cal-header {
+  background: var(--primary);
+  color: white;
+  text-align: center;
+  padding: 8px 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.cal-day {
+  position: relative;
+  min-height: 70px;
+  padding: 4px 6px;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cal-day-empty {
+  background: var(--border-light);
+  min-height: 70px;
+}
+
+.cal-day-num {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.cal-day.weekend {
+  background: #F8F9FA;
+}
+
+.cal-day.unscheduled {
+  background: #FAFAFA;
+}
+
+.cal-day.unscheduled .cal-day-num {
+  color: var(--text-light);
+}
+
+.cal-day.holiday {
+  background: #FFF7ED;
+}
+
+.cal-day.today {
+  box-shadow: inset 0 0 0 2px var(--primary);
+}
+
+.cal-dot {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.cal-dot.present { color: var(--success); }
+.cal-dot.late { color: var(--warning); }
+.cal-dot.absent { color: var(--danger); }
+
+/* Billing period bars */
+.cal-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 6px;
+  z-index: 2;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.cal-bar:hover { opacity: 0.7; }
+
+.cal-bar.bar-paid { background: var(--success); }
+.cal-bar.bar-unpaid { background: var(--danger); }
+
+.cal-bar.bar-start { border-radius: 3px 0 0 3px; margin-left: 4px; }
+.cal-bar.bar-end { border-radius: 0 3px 3px 0; margin-right: 4px; }
+.cal-bar.bar-single { border-radius: 3px; margin-left: 4px; margin-right: 4px; }
+.cal-bar.bar-mid { border-radius: 0; }
+
+/* Calendar summary */
+.calendar-summary {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+}
+
+.summary-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.summary-stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ==================== BILLING PERIODS LIST ==================== */
+.billing-periods-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.billing-period-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.billing-period-dates {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.billing-period-amount {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.billing-period-bizdays {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  background: var(--border-light);
+  padding: 1px 8px;
+  border-radius: 10px;
+  margin-left: 8px;
+}
+
+.bizdays-label {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.billing-period-actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* ==================== SCHEDULE EDITOR ==================== */
+.schedule-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 1fr auto repeat(5, 40px) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+
+.schedule-row label {
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.schedule-row input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--primary);
+}
+
+.schedule-row .student-name { font-weight: 600; }
+
+.schedule-count {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  min-width: 45px;
+  text-align: center;
+}
+
+/* ==================== HOLIDAYS ==================== */
+.holiday-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.holidays-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.holiday-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+
+.holiday-row .btn {
+  padding: 2px 8px;
+  font-size: 0.75rem;
+}
+
+/* ==================== INPUTS ==================== */
+.input {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--white);
+  width: 100%;
+  transition: border-color 0.15s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+}
+
+.textarea { resize: vertical; }
+
+/* ==================== MODAL ==================== */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal.show { display: flex; }
+
+.modal-content {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-md);
+  animation: modalIn 0.2s ease;
+}
+
+@keyframes modalIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  line-height: 1;
+}
+
+.modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.payment-toggle {
+  display: flex;
+  gap: 6px;
+}
+
+.payment-toggle .btn { opacity: 0.5; }
+.payment-toggle .btn.active { opacity: 1; }
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.modal-footer-right {
+  display: flex;
+  gap: 8px;
+}
+
+/* ==================== ALL STUDENTS MATRIX VIEW ==================== */
+.matrix-header-bar {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 12px 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.matrix-scroll-wrapper {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.matrix-table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 900px;
+  font-size: 0.8rem;
+}
+
+.matrix-table th,
+.matrix-table td {
+  border: 1px solid var(--border);
+  text-align: center;
+  padding: 0;
+  vertical-align: middle;
+}
+
+/* Sticky student name column */
+.matrix-table th.matrix-name-col,
+.matrix-table td.matrix-name-col {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: var(--white);
+  text-align: left;
+  padding: 6px 10px;
+  min-width: 160px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-right: 2px solid var(--border);
+}
+
+.matrix-table thead th.matrix-name-col {
+  background: var(--primary);
+  color: white;
+  border-right: 2px solid var(--primary-hover);
+}
+
+/* Day header columns */
+.matrix-table thead th {
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+  padding: 4px 2px;
+  font-size: 0.75rem;
+}
+
+.matrix-table thead th.matrix-day-header {
+  min-width: 34px;
+  width: 34px;
+}
+
+.matrix-table thead th.weekend-header {
+  background: var(--primary-hover);
+}
+
+.matrix-day-num {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.matrix-day-name {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* Student name in row */
+.matrix-student-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.matrix-student-name:hover {
+  color: var(--primary);
+}
+
+/* Day cells */
+.matrix-table td.matrix-cell {
+  position: relative;
+  height: 36px;
+  padding: 0;
+  cursor: default;
+}
+
+.matrix-cell.weekend-cell {
+  background: #F5F5F5;
+}
+
+.matrix-cell.unscheduled-cell {
+  background: #FAFAFA;
+}
+
+.matrix-cell.today-cell {
+  box-shadow: inset 0 0 0 2px var(--primary);
+}
+
+.matrix-cell.holiday-cell {
+  background: #FFF7ED;
+}
+
+/* Attendance dots in matrix */
+.matrix-dot {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.matrix-dot.present { color: var(--success); }
+.matrix-dot.late { color: var(--warning); }
+.matrix-dot.absent { color: var(--danger); }
+
+/* Billing bar in matrix - spans bottom of cell */
+.matrix-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  cursor: pointer;
+}
+
+.matrix-bar.bar-paid { background: var(--success); }
+.matrix-bar.bar-unpaid { background: var(--danger); }
+.matrix-bar.bar-start { border-radius: 3px 0 0 3px; margin-left: 2px; }
+.matrix-bar.bar-end { border-radius: 0 3px 3px 0; margin-right: 2px; }
+.matrix-bar.bar-single { border-radius: 3px; margin-left: 2px; margin-right: 2px; }
+.matrix-bar.bar-mid { border-radius: 0; }
+
+.matrix-bar:hover { opacity: 0.7; }
+
+/* Summary column */
+.matrix-table th.matrix-summary-col,
+.matrix-table td.matrix-summary-col {
+  padding: 4px 6px;
+  font-size: 0.75rem;
+  min-width: 50px;
+  white-space: nowrap;
+  background: var(--white);
+  border-left: 2px solid var(--border);
+}
+
+.matrix-table thead th.matrix-summary-col {
+  background: var(--primary);
+  color: white;
+  border-left: 2px solid var(--primary-hover);
+}
+
+/* Alternating row colors */
+.matrix-table tbody tr:nth-child(even) td {
+  background-color: rgba(0,0,0,0.015);
+}
+
+.matrix-table tbody tr:nth-child(even) td.matrix-name-col {
+  background-color: #FAFBFC;
+}
+
+.matrix-table tbody tr:hover td {
+  background-color: var(--primary-light);
+}
+
+.matrix-table tbody tr:hover td.matrix-name-col {
+  background-color: var(--primary-light);
+}
+
+/* ==================== ALERTS ==================== */
+.alerts-section {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alert-card {
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.alert-card.alert-expired {
+  background: var(--danger-light);
+  border-left: 4px solid var(--danger);
+}
+
+.alert-card.alert-absences {
+  background: var(--warning-light);
+  border-left: 4px solid var(--warning);
+}
+
+.alert-card.alert-ending-soon {
+  background: #EFF6FF;
+  border-left: 4px solid #3B82F6;
+}
+
+.alert-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.alert-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.alert-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
+
+.alert-detail {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.alert-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.alert-actions .btn {
+  font-size: 0.78rem;
+  padding: 4px 12px;
+}
+
+.alert-dismiss {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0 4px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.alert-dismiss:hover {
+  color: var(--text-secondary);
+}
+
+/* ==================== HIDDEN STUDENTS ==================== */
+.section-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.hidden-students-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hidden-student-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+
+.hidden-student-row .student-name {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.btn-outline-danger {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+}
+
+.btn-outline-danger:hover {
+  opacity: 1;
+  background: var(--danger-light);
+}
+
+/* ==================== UTILITIES ==================== */
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-secondary);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 32px;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .header { padding: 12px 16px; }
+  .header h1 { font-size: 1.1rem; }
+  .tabs { padding: 8px 16px 0; }
+  .tab-btn { padding: 8px 12px; font-size: 0.85rem; }
+  .tab-content { padding: 16px; }
+  .summary-cards { grid-template-columns: repeat(2, 1fr); }
+
+  .student-billing-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .calendar-controls { flex-direction: column; align-items: stretch; }
+  .calendar-student-select select { min-width: 100%; }
+
+  .cal-day { min-height: 56px; }
+  .cal-day-num { font-size: 0.75rem; }
+  .cal-dot { font-size: 0.75rem; }
+
+  .schedule-row { grid-template-columns: 1fr; gap: 6px; }
+  .form-row { grid-template-columns: 1fr; }
+  .filter-bar { flex-direction: column; }
+}

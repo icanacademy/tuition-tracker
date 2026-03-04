@@ -1,0 +1,16 @@
+{
+  "name": "tuition-tracker",
+  "version": "1.0.0",
+  "description": "Student tuition billing tracker with calendar view and Notion integration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.14",
+    "better-sqlite3": "^12.5.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}

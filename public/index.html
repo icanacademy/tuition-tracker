@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICAN Tuition Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="header-left">
+        <img src="assets/ican-logo.png" alt="ICAN" class="header-logo" onerror="this.style.display='none'">
+        <div>
+          <h1>Tuition Tracker</h1>
+          <p class="header-subtitle">Student Billing Management</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <span id="today-date" class="header-date"></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tabs -->
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+    <button class="tab-btn" data-tab="calendar">Calendar View</button>
+    <button class="tab-btn" data-tab="settings">Settings</button>
+    <div class="tab-indicator"></div>
+  </nav>
+
+  <!-- Dashboard Tab -->
+  <div id="dashboard-tab" class="tab-content active">
+    <div class="summary-cards">
+      <div class="summary-card">
+        <div class="summary-label">Local Students</div>
+        <div class="summary-value" id="total-local">0</div>
+      </div>
+      <div class="summary-card card-warning">
+        <div class="summary-label">Unpaid Periods</div>
+        <div class="summary-value" id="total-unpaid">0</div>
+      </div>
+      <div class="summary-card card-danger">
+        <div class="summary-label">Total Unpaid</div>
+        <div class="summary-value" id="total-unpaid-amount">-</div>
+      </div>
+      <div class="summary-card card-success">
+        <div class="summary-label">Paid This Month</div>
+        <div class="summary-value" id="total-paid-month">0</div>
+      </div>
+    </div>
+
+    <div id="alerts-container"></div>
+
+    <div class="section">
+      <div class="section-header">
+        <h2>Student Billing Overview</h2>
+        <div class="filter-bar">
+          <select id="filter-status" class="filter-select">
+            <option value="all">All Status</option>
+            <option value="unpaid">Unpaid Only</option>
+            <option value="paid">Paid Only</option>
+          </select>
+          <select id="filter-type" class="filter-select">
+            <option value="local">Local Only</option>
+            <option value="all">All Students</option>
+          </select>
+        </div>
+      </div>
+      <div id="student-billing-list" class="student-billing-list">
+        <div class="loading">Loading students...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calendar Tab -->
+  <div id="calendar-tab" class="tab-content">
+    <div class="calendar-controls">
+      <div class="calendar-student-select">
+        <label>Student:</label>
+        <select id="calendar-student" class="filter-select">
+          <option value="">Select a student</option>
+        </select>
+      </div>
+      <div id="student-schedule-display" class="schedule-display" style="display:none"></div>
+    </div>
+
+    <!-- Single student calendar -->
+    <div id="calendar-container" class="calendar-container" style="display:none">
+      <div class="calendar-nav">
+        <button id="prev-month" class="btn btn-icon">&larr;</button>
+        <h2 id="calendar-month-label" class="calendar-month-label"></h2>
+        <button id="next-month" class="btn btn-icon">&rarr;</button>
+      </div>
+
+      <div class="calendar-legend">
+        <span class="legend-item"><span class="legend-dot present"></span> Present</span>
+        <span class="legend-item"><span class="legend-dot late"></span> Late</span>
+        <span class="legend-item"><span class="legend-dot absent"></span> Absent</span>
+        <span class="legend-item"><span class="legend-bar paid"></span> Paid</span>
+        <span class="legend-item"><span class="legend-bar unpaid"></span> Unpaid</span>
+      </div>
+
+      <div id="calendar-grid" class="calendar-grid">
+        <div class="cal-header">Sun</div>
+        <div class="cal-header">Mon</div>
+        <div class="cal-header">Tue</div>
+        <div class="cal-header">Wed</div>
+        <div class="cal-header">Thu</div>
+        <div class="cal-header">Fri</div>
+        <div class="cal-header">Sat</div>
+      </div>
+
+      <div class="calendar-summary" id="calendar-summary"></div>
+    </div>
+
+    <div id="billing-periods-panel" class="section" style="display:none">
+      <div class="section-header">
+        <h2>Billing Periods</h2>
+        <button id="add-period-btn" class="btn btn-primary">+ Add Period</button>
+      </div>
+      <div id="billing-periods-list" class="billing-periods-list"></div>
+    </div>
+
+    <!-- All students matrix view -->
+    <div id="all-students-container" style="display:none">
+      <div class="matrix-header-bar">
+        <button id="all-prev-month" class="btn btn-icon">&larr;</button>
+        <h2 id="all-month-label" class="calendar-month-label"></h2>
+        <button id="all-next-month" class="btn btn-icon">&rarr;</button>
+        <div class="calendar-legend" style="margin:0;margin-left:auto">
+          <span class="legend-item"><span class="legend-dot present"></span> Present</span>
+          <span class="legend-item"><span class="legend-dot late"></span> Late</span>
+          <span class="legend-item"><span class="legend-dot absent"></span> Absent</span>
+          <span class="legend-item"><span class="legend-bar paid"></span> Paid</span>
+          <span class="legend-item"><span class="legend-bar unpaid"></span> Unpaid</span>
+        </div>
+      </div>
+      <div class="matrix-scroll-wrapper">
+        <div id="all-students-matrix" class="matrix-table-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Tab -->
+  <div id="settings-tab" class="tab-content">
+    <div class="section">
+      <div class="section-header">
+        <h2>Student Schedules</h2>
+        <button id="sync-notion-btn" class="btn btn-secondary">Sync from Notion</button>
+      </div>
+      <div id="schedule-editor" class="schedule-editor">
+        <div class="loading">Loading...</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h2>Hidden Students</h2>
+      </div>
+      <p class="section-desc">Students removed from the main list. They can be restored at any time.</p>
+      <div id="hidden-students-list" class="hidden-students-list">
+        <div class="empty-state">No hidden students.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h2>Holidays</h2>
+      </div>
+      <div class="holiday-form">
+        <input type="date" id="holiday-date" class="input">
+        <input type="text" id="holiday-desc" class="input" placeholder="Description (optional)">
+        <button id="add-holiday-btn" class="btn btn-primary">Add</button>
+      </div>
+      <div id="holidays-list" class="holidays-list"></div>
+    </div>
+  </div>
+
+  <!-- Billing Period Modal -->
+  <div id="billing-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="billing-modal-title">Add Billing Period</h3>
+        <button class="modal-close" id="billing-modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Student</label>
+          <select id="modal-student" class="input"></select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Start Date</label>
+            <input type="text" id="modal-start-date" class="input" placeholder="YYYY-MM-DD">
+          </div>
+          <div class="form-group">
+            <label>End Date</label>
+            <input type="text" id="modal-end-date" class="input" placeholder="YYYY-MM-DD">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tuition Amount</label>
+            <input type="number" id="modal-amount" class="input" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Currency</label>
+            <select id="modal-currency" class="input">
+              <option value="₱">₱ (PHP)</option>
+              <option value="₩">₩ (KRW)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea id="modal-notes" class="input textarea" rows="2" placeholder="Optional notes"></textarea>
+        </div>
+        <div class="form-group" id="modal-payment-group" style="display:none">
+          <label>Payment Status</label>
+          <div class="payment-toggle">
+            <button type="button" id="modal-status-unpaid" class="btn btn-sm btn-danger active">Unpaid</button>
+            <button type="button" id="modal-status-paid" class="btn btn-sm btn-success">Paid</button>
+          </div>
+          <input type="text" id="modal-paid-date" class="input" placeholder="Payment date" style="display:none;margin-top:8px">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="billing-modal-delete" class="btn btn-danger" style="display:none">Delete</button>
+        <div class="modal-footer-right">
+          <button id="billing-modal-cancel" class="btn btn-secondary">Cancel</button>
+          <button id="billing-modal-save" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="app.js"></script>
+  <script src="calendar.js"></script>
+  <script src="billing.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
